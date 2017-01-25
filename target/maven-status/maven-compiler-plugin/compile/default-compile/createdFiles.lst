@@ -1,3 +1,9 @@
+com\lazi\coder\service\TestService.class
 com\lazi\coder\web\GreetingController1.class
 com\lazi\coder\web\MainController.class
+com\lazi\coder\MongoConfiguration.class
+com\lazi\coder\domain\Blog.class
+com\lazi\coder\domain\Customer.class
 com\lazi\coder\LazicoderApplication.class
+com\lazi\coder\dao\CustomerRepository.class
+com\lazi\coder\dao\CustomerRepositoryTest.class
