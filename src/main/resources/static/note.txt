@@ -1,0 +1,2 @@
+    clientId: 379843209043251
+    clientSecret: f7498dabd7090e81729cd6d215eaf101
