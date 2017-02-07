@@ -9,16 +9,18 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class Blog {
 
     private String id;
     private String title;
     private String content;
-    private String img;
+    private String img;//will be base64 coder
+    private Category category;
+    private List<Tag> tags;
 
     @CreatedDate
     private Date createdDate;
@@ -26,9 +28,4 @@ public class Blog {
     @LastModifiedDate
     private Date lastModifiedDate;
 
-    @CreatedBy
-    private String createdBy;
-
-    @LastModifiedBy
-    private String lastModifiedBy;
 }
