@@ -21,6 +21,7 @@ public class Blog {
     private String img;//will be base64 coder
     private Category category;
     private List<Tag> tags;
+    private List<Comment> comments;
 
     @CreatedDate
     private Date createdDate;

@@ -5,11 +5,12 @@ import com.lazi.coder.domain.Blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+@CrossOrigin
 @RestController
 @RequestMapping("/blog")
 public class BlogController {
@@ -36,4 +37,5 @@ public class BlogController {
     public Blog getById(@PathVariable String id) {
         return blogRepository.findById(id);
     }
+
 }

@@ -9,7 +9,5 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
-
-    @Id
     private String name;
 }
