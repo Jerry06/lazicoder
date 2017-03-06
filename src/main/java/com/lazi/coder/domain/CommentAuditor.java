@@ -17,7 +17,7 @@ public class CommentAuditor implements AuditorAware<UserOAuthInfo> {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null && authentication.isAuthenticated()) {
+        if (authentication != null && authentication.isAuthenticated() && authentication instanceof OAuth2Authentication) {
             UserOAuthInfo userOAuthInfo = new UserOAuthInfo((Map<String, String>) ((OAuth2Authentication) authentication).getUserAuthentication().getDetails());
             userOAuthInfo.setTokenValue(((OAuth2AuthenticationDetails)authentication.getDetails()).getTokenValue());
             return userOAuthInfo;

@@ -65,6 +65,7 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         // @formatter:off
 //        http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**").permitAll().anyRequest()
 //                .authenticated().and().exceptionHandling()
@@ -72,7 +73,7 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
 //                .logoutSuccessUrl("/").permitAll().and().csrf()
 //                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
 //                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-        // @formatter:on
+         //@formatter:on
     }
 
     @Override
@@ -87,6 +88,7 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
         @Override
         public void configure(HttpSecurity http) throws Exception {
             // @formatter:off
+            http.csrf().disable();
             http.antMatcher("/me").authorizeRequests().anyRequest().authenticated();
             // @formatter:on
         }

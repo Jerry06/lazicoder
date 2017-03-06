@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-@CrossOrigin
+@CrossOrigin()
 @RestController
 @RequestMapping("/blog")
 public class BlogController {
@@ -24,7 +24,7 @@ public class BlogController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public Blog save(Blog blog) {
+    public Blog save(@RequestBody Blog blog) {
         return blogRepository.save(blog);
     }
 
