@@ -7,9 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
 @CrossOrigin()
 @RestController
 @RequestMapping("/blog")
@@ -20,7 +17,7 @@ public class BlogController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Page<Blog> getAll(Pageable pageable) {
-        return blogRepository.findAll(pageable);
+        return blogRepository.findAllByOrderByCreatedDateDesc(pageable);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

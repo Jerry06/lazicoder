@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public interface BlogRepository extends MongoRepository<Blog, String> {
 
-    Page<Blog> findAll(Pageable pageable);
+    Page<Blog> findAllByOrderByCreatedDateDesc(Pageable pageable);
 
     Blog findById(String id);
 
