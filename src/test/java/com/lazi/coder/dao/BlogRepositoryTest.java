@@ -33,7 +33,7 @@ public class BlogRepositoryTest {
         for (int i = 0; i < 5; i++) {
             Blog blog = new Blog();
             //blog.setId(UUID.randomUUID());
-            Category cat1 = new Category("cat1");
+            Category cat1 = new Category("Angular2");
             blog.setCategory(cat1);
             blog.setContent(UUID.randomUUID().toString());
             blog.setTitle(UUID.randomUUID().toString());
@@ -57,7 +57,7 @@ public class BlogRepositoryTest {
         for (int i = 0; i < 5; i++) {
             Blog blog = new Blog();
             //blog.setId(UUID.randomUUID());
-            Category cat2 = new Category("cAt2");
+            Category cat2 = new Category("Java");
             blog.setCategory(cat2);
             blog.setContent(UUID.randomUUID().toString());
             blog.setTitle(UUID.randomUUID().toString());

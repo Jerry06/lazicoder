@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-@ConfigurationProperties(value = "viet", locations = {"classpath:application1.yaml"})
+//@ConfigurationProperties(value = "viet", locations = {"classpath:application1.yaml"})
 @Configuration
 public class Test123 {
 

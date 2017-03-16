@@ -7,7 +7,8 @@ import org.springframework.data.annotation.Id;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Category {
+
+    @Id
     private String name;
 }
