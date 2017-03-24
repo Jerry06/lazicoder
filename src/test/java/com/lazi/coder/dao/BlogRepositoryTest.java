@@ -1,10 +1,7 @@
 package com.lazi.coder.dao;
 
 import com.lazi.coder.LazicoderApplication;
-import com.lazi.coder.domain.Blog;
-import com.lazi.coder.domain.Category;
-import com.lazi.coder.domain.Comment;
-import com.lazi.coder.domain.Reply;
+import com.lazi.coder.domain.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,11 +29,15 @@ public class BlogRepositoryTest {
         repository.deleteAll();
         for (int i = 0; i < 5; i++) {
             Blog blog = new Blog();
+            List<Tag> tags = new ArrayList<>();
+            tags.add(new Tag("lamda"));
+            tags.add(new Tag("java-8"));
             //blog.setId(UUID.randomUUID());
             Category cat1 = new Category("Angular2");
             blog.setCategory(cat1);
             blog.setContent(UUID.randomUUID().toString());
             blog.setTitle(UUID.randomUUID().toString());
+            blog.setTags(tags);
             List<Comment> commentList = new ArrayList<>();
             Comment comment = new Comment();
             comment.setContent("content1111");
