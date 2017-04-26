@@ -1,14 +1,12 @@
 package com.lazi.coder.dao;
 
-import com.lazi.coder.LazicoderApplication;
+import com.lazi.coder.SocialApplication;
 import com.lazi.coder.domain.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LazicoderApplication.class)
+@SpringBootTest(classes = SocialApplication.class)
 public class BlogRepositoryTest {
 
     @Autowired
@@ -33,8 +31,6 @@ public class BlogRepositoryTest {
             tags.add(new Tag("lamda"));
             tags.add(new Tag("java-8"));
             //blog.setId(UUID.randomUUID());
-            Category cat1 = new Category("Angular2");
-            blog.setCategory(cat1);
             blog.setContent(UUID.randomUUID().toString());
             blog.setTitle(UUID.randomUUID().toString());
             blog.setTags(tags);
@@ -57,21 +53,24 @@ public class BlogRepositoryTest {
         }
         for (int i = 0; i < 5; i++) {
             Blog blog = new Blog();
-            //blog.setId(UUID.randomUUID());
-            Category cat2 = new Category("Java");
-            blog.setCategory(cat2);
+            List<Tag> tags = new ArrayList<>();
+            tags.add(new Tag("java-9"));
+            blog.setTags(tags);
             blog.setContent(UUID.randomUUID().toString());
             blog.setTitle(UUID.randomUUID().toString());
             dave = repository.save(blog);
         }
-//        List<Blog> all = repository.findAll();
-//        System.out.println(all);
+        List<String> list = new ArrayList<>();
+        list.add("java-8");
+        list.add("Java-9");
+        List<Blog> all = repository.findByTagsNameIn(list);
+        System.out.println(all);
     }
 
     @Test
     public void setsIdOnSave() {
-        PageRequest pageRequest = new PageRequest(1, 2);
-        Page<Blog> rs = repository.findByCategory_nameIgnoreCase("CAT1", pageRequest);
-        System.out.println(rs);
+//        PageRequest pageRequest = new PageRequest(1, 2);
+//        Page<Blog> rs = repository.findByCategory_nameIgnoreCase("CAT1", pageRequest);
+//        System.out.println(rs);
     }
 }

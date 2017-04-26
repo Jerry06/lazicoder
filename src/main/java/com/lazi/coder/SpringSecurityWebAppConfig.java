@@ -11,7 +11,7 @@
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http.antMatcher("/**")
 //            .authorizeRequests()
-//            .antMatchers("/", "/login**", "/webjars/**", "/index.html")
+//            .antMatchers("/", "/login**", "/webjars/**", "/1.html")
 //            .permitAll()
 //            .anyRequest()
 //            .authenticated();

@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
@@ -37,6 +38,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.CompositeFilter;
@@ -48,6 +50,7 @@ import org.springframework.web.filter.CompositeFilter;
 @EnableOAuth2Client
 @EnableAuthorizationServer
 @Order(6)
+@CrossOrigin
 public class SocialApplication extends WebSecurityConfigurerAdapter implements CommandLineRunner{
 
     @Autowired
@@ -56,6 +59,27 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
     @Autowired
     Test123 testt;
 
+    class LoginResult{
+        private boolean result = false;
+        private String name;
+
+        public boolean isResult() {
+            return result;
+        }
+
+        public void setResult(boolean result) {
+            this.result = result;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
     @RequestMapping({"/user", "/me"})
     public Map<String, String> user(Principal principal) {
         Map<String, String> map = new LinkedHashMap<>();
@@ -63,17 +87,32 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
         return map;
     }
 
+    @RequestMapping({"/user1", "/me1"})
+    public LoginResult user1(Principal principal) {
+        LoginResult loginResult = new LoginResult();
+        if (principal != null){
+            loginResult.setName(principal.getName());
+            loginResult.setResult(true);
+        }
+        return loginResult;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
         // @formatter:off
-//        http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**").permitAll().anyRequest()
-//                .authenticated().and().exceptionHandling()
-//                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and().logout()
-//                .logoutSuccessUrl("/").permitAll().and().csrf()
-//                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+        http.csrf().disable();
+//                .authorizeRequests()
+////                .antMatchers(HttpMethod.POST).authenticated()
+////                .antMatchers(HttpMethod.GET).permitAll()
+//                .antMatchers().permitAll()
+//                .and().exceptionHandling()
+//                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"))
+//                .and().logout()
+//                .logoutSuccessUrl("/").permitAll().and()
+//                //.csrf()
+//                //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
 //                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-         //@formatter:on
+//         //@formatter:on
     }
 
     @Override
@@ -82,17 +121,17 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
         System.out.println(ob);
     }
 
-    @Configuration
-    @EnableResourceServer
-    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            // @formatter:off
-            http.csrf().disable();
-            http.antMatcher("/me").authorizeRequests().anyRequest().authenticated();
-            // @formatter:on
-        }
-    }
+//    @Configuration
+//    @EnableResourceServer
+//    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+//        @Override
+//        public void configure(HttpSecurity http) throws Exception {
+//            // @formatter:off
+//            http.csrf().disable();
+//            http.antMatcher("/me").authorizeRequests().anyRequest().authenticated();
+//            // @formatter:on
+//        }
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(SocialApplication.class, args);

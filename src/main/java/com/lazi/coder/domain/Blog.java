@@ -1,13 +1,8 @@
 package com.lazi.coder.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
@@ -21,7 +16,6 @@ public class Blog {
     private String title;
     private String content;
     private String img;//will be base64 coder
-    private Category category;
     private List<Tag> tags;
     private List<Comment> comments;
 
