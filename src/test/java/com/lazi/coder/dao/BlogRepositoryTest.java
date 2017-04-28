@@ -31,8 +31,9 @@ public class BlogRepositoryTest {
             tags.add(new Tag("lamda"));
             tags.add(new Tag("java-8"));
             //blog.setId(UUID.randomUUID());
+            blog.setSummary("Summary 111");
             blog.setContent(UUID.randomUUID().toString());
-            blog.setTitle(UUID.randomUUID().toString());
+            blog.setTitle("java-8" + UUID.randomUUID().toString());
             blog.setTags(tags);
             List<Comment> commentList = new ArrayList<>();
             Comment comment = new Comment();
@@ -56,15 +57,16 @@ public class BlogRepositoryTest {
             List<Tag> tags = new ArrayList<>();
             tags.add(new Tag("java-9"));
             blog.setTags(tags);
+            blog.setSummary("Summary 111");
             blog.setContent(UUID.randomUUID().toString());
-            blog.setTitle(UUID.randomUUID().toString());
+            blog.setTitle("java-9" + UUID.randomUUID().toString());
             dave = repository.save(blog);
         }
         List<String> list = new ArrayList<>();
         list.add("java-8");
         list.add("Java-9");
-        List<Blog> all = repository.findByTagsNameIn(list);
-        System.out.println(all);
+//        List<Blog> all = repository.findByTagsNameIn(list);
+//        System.out.println(all);
     }
 
     @Test

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin()
@@ -39,7 +40,9 @@ public class BlogController {
 
     @RequestMapping(value = "tag/{tag}", method = RequestMethod.GET)
     public Page<Blog> getAll(@PathVariable("tag") String tag, Pageable pageable) {
-        return blogRepository.findAllByOrderByCreatedDateDesc(pageable);
+        List<String> tags = new ArrayList<>();
+        tags.add(tag);
+        return blogRepository.findByTagsNameIn(tags, pageable);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

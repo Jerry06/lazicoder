@@ -22,7 +22,7 @@ public class TagRepositoryTest {
     @Before
     public void setUp() {
         repository.deleteAll();
-        String[] strs = {"java-8", "java-9", "lamda"};
+        String[] strs = {"java","java-8", "java-9", "lamda"};
         for (String str : strs) {
             Tag tag1 = new Tag(str);
             repository.save(tag1);
