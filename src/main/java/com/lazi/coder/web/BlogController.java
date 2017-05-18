@@ -38,6 +38,11 @@ public class BlogController {
         return blogRepository.save(blog);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable String id) {
+        blogRepository.delete(id);
+    }
+
     @RequestMapping(value = "tag/{tag}", method = RequestMethod.GET)
     public Page<Blog> getAll(@PathVariable("tag") String tag, Pageable pageable) {
         List<String> tags = new ArrayList<>();

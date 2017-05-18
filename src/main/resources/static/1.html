@@ -14,7 +14,22 @@
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body ng-app="app" ng-controller="home as home">
-<h1>Login</h1>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=379843209043251";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+<div class="fb-comments"  data-numposts="5"></div>
+
+<h1>Login123</h1>
+
 <div class="container" ng-show="!home.authenticated">
     <div>
         With Facebook: <a href="/login/facebook">click here</a>

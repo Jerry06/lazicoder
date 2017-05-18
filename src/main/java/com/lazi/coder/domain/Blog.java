@@ -28,7 +28,10 @@ public class Blog {
     private Date lastModifiedDate;
 
     public static void main(String[] args) {
-        2017-03-31T19:56:06.733Z
+        Blog[] array = new Blog[5];
+        Blog b = new Blog();
+        array[0] = b;
+        System.out.println(array);
     }
 
 }

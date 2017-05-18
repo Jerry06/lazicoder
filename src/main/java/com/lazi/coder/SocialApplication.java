@@ -51,7 +51,7 @@ import org.springframework.web.filter.CompositeFilter;
 @EnableAuthorizationServer
 @Order(6)
 @CrossOrigin
-public class SocialApplication extends WebSecurityConfigurerAdapter implements CommandLineRunner{
+public class SocialApplication extends WebSecurityConfigurerAdapter implements CommandLineRunner {
 
     @Autowired
     OAuth2ClientContext oauth2ClientContext;
@@ -59,7 +59,7 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
     @Autowired
     Test123 testt;
 
-    class LoginResult{
+    class LoginResult {
         private boolean result = false;
         private String name;
 
@@ -90,7 +90,7 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
     @RequestMapping({"/user1", "/me1"})
     public LoginResult user1(Principal principal) {
         LoginResult loginResult = new LoginResult();
-        if (principal != null){
+        if (principal != null) {
             loginResult.setName(principal.getName());
             loginResult.setResult(true);
         }
@@ -102,9 +102,9 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
         // @formatter:off
         http.csrf().disable();
 //                .authorizeRequests()
-////                .antMatchers(HttpMethod.POST).authenticated()
-////                .antMatchers(HttpMethod.GET).permitAll()
-//                .antMatchers().permitAll()
+//                .antMatchers(HttpMethod.POST).authenticated()
+//                .antMatchers(HttpMethod.GET).permitAll()
+//                .antMatchers("/**").permitAll()
 //                .and().exceptionHandling()
 //                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"))
 //                .and().logout()
@@ -112,7 +112,7 @@ public class SocialApplication extends WebSecurityConfigurerAdapter implements C
 //                //.csrf()
 //                //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
 //                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-//         //@formatter:on
+        //@formatter:on
     }
 
     @Override
