@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @CrossOrigin()
 @RestController
 @RequestMapping("api/blog")
@@ -26,6 +28,19 @@ public class BlogController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Page<Blog> getAll(Pageable pageable) {
         return blogRepository.findAllByOrderByCreatedDateDesc(pageable);
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public Page<Blog> search(@RequestParam String text) {
+        List<Blog> all = blogRepository.findAll();
+        List<Blog> result = all.parallelStream()
+                .filter(b -> b.getTags().stream().anyMatch(t -> t.equals(text)) ||
+                        b.getTitle().contains(text) ||
+                        b.getSummary().contains(text) ||
+                        b.getContent().contains(text))
+                .collect(toList());
+
+        return result;
     }
 
     @RequestMapping(value = "tags", method = RequestMethod.GET)
