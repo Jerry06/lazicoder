@@ -6,12 +6,15 @@ import com.lazi.coder.domain.Blog;
 import com.lazi.coder.domain.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 @CrossOrigin()
@@ -38,9 +41,11 @@ public class BlogController {
                         b.getTitle().contains(text) ||
                         b.getSummary().contains(text) ||
                         b.getContent().contains(text))
+                .sorted(comparing(Blog::getLastModifiedDate).reversed())
                 .collect(toList());
 
-        return result;
+        Pageable pageable = new PageRequest(0, 99999);
+        return new PageImpl<Blog>(result, pageable, result.size());
     }
 
     @RequestMapping(value = "tags", method = RequestMethod.GET)
