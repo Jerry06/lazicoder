@@ -31,14 +31,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("Jerry06").password("Truquynh06").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("Jerry06").password("Trucquynh06").roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
