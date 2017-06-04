@@ -1,6 +1,17 @@
 server:
   port: 8080
 
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: Blog
+  thymeleaf:
+    cache: false
+  template:
+    cache: false
+
 viet:
   child1: 123
 
@@ -37,3 +48,4 @@ github:
 logging:
   level:
     org.springframework.security: DEBUG
+
